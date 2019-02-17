@@ -15,6 +15,7 @@ class choices extends Phaser.Scene {
         //create two arrays: aggressions and friendly
         //'aggressions' has 2 values: message and meaning
         //'friendly' holds messages
+        //testing
 
         
         var phrase = {message:"xyz", meaning: "abc"};
