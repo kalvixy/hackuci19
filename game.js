@@ -1,14 +1,17 @@
 var config = {
             
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    width: window.innerWidth,
+    height: window.innerHeight,
+    //autoResize = true,
+    resolution: window.devicePixelRatio,
     physics: {
         default: 'arcade',
         arcade: {
             gravity: {y : 200}
         }
     },
+    
     scene: [ intro, choices ]
     /*
     scene: {
@@ -18,6 +21,7 @@ var config = {
     }
     */
 };
+
 
 var game = new Phaser.Game(config);
 

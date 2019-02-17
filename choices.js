@@ -10,19 +10,22 @@ class choices extends Phaser.Scene {
     
     create ()
     {
-        this.image = this.add.image(400,300, 'background');
+        var width = this.sys.game.config.width; 
+        var height = this.sys.game.config.height; 
+        this.cameras.resize(width,height);
+        this.cameras.main.setBackgroundColor('#f7dba7');
+        
+        this.add.text(width/2 *0.6, 20, "Click on the microaggression:", {font:"30px", color:"#465354"})
 
         //create two arrays: aggressions and friendly
         //'aggressions' has 2 values: message and meaning
         //'friendly' holds messages
-        //testing
-
         
         var phrase = {message:"When a female student asks a male professor for extra help on an engineering assignment, he asks “What do you need to work on this for anyway?", 
                       meaning: "Women are less capable in math and science."};
         var phrase2 = {message: "Female doctor mistaken for a nurse.", 
                        meaning: "Women occupy nurturing positions and are unable to take on more challenging tasks."};
-        var phrase3 = {message: "You’re a girl, you don’t have to be good at math.”", 
+        var phrase3 = {message: "You’re a girl, you don’t have to be good at math.", 
                        meaning: "Women are less capable in math and science."};
         var phrase4 = {message: "An advisor asks a female student if she is planning on having children while in postdoctoral training.", 
                        meaning: "Women should be married during child-bearing ages because that is their primary purpose."};
@@ -51,6 +54,20 @@ class choices extends Phaser.Scene {
         //continue for all friendly phrases
         var friendly = [nice, nice2, nice3, nice4, nice5, nice6, nice7, nice8]; //extend for all aggressions
 
-        
+        /*********************************************************************************************************************** */
+        /*********************************************************************************************************************** */
+
+        var rand1 = Math.floor(Math.random() * aggressions.length);
+        var rand2 = Math.floor(Math.random() * friendly.length);
+
+        var obj = aggressions[rand1];
+        var arg = this.add.text(width/2 * 0.2, 200, obj.message, {font:"20px", color:"#465354"} );
+        var yay = this.add.text(width/2 * 0.2, 300, friendly[rand2], {font:"20px", color:"#465354"});
+
+        // if(arg.input)
     }
+}
+
+function selectPhrase(clickedMessage) {
+
 }

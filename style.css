@@ -1,0 +1,19 @@
+body {
+	margin: 0;
+	overflow: hidden;
+	background-color : #f7dba7;
+}
+		
+canvas {
+    display: block;
+    background-color : #f7dba7;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+		
+#phaser-app {
+	margin: 0 auto;
+}
