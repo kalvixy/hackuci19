@@ -12,7 +12,7 @@ var config = {
         }
     },
     
-    scene: [ intro, choices ]
+    scene: [ intro, choices, play ]
     /*
     scene: {
         preload: preload,

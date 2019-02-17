@@ -8,6 +8,10 @@ class choices extends Phaser.Scene {
         this.load.image('background', 'assets/simple_background.png');   
     }
     
+
+    //to reset string upon clicked event
+
+
     create ()
     {
         var width = this.sys.game.config.width; 
@@ -15,7 +19,7 @@ class choices extends Phaser.Scene {
         this.cameras.resize(width,height);
         this.cameras.main.setBackgroundColor('#f7dba7');
         
-        this.add.text(width/2 *0.6, 20, "Click on the microaggression:", {font:"30px", color:"#465354"})
+        this.add.text(width/2 *0.6, 70, "Click on the microaggression:", {font:"bold 30px ", color:"#465354"})
 
         //create two arrays: aggressions and friendly
         //'aggressions' has 2 values: message and meaning
@@ -39,7 +43,7 @@ class choices extends Phaser.Scene {
                        meaning: "Women should be married during child-bearing ages because that is their primary purpose."};
 
         //continue for all aggression phrases
-        var aggressions = [phrase, phrase2, phrase3, phrase4, phrase5, phrase6, phrase7, phrase8]; //extend line22 until all aggressions are complete
+        aggressions = [phrase, phrase2, phrase3, phrase4, phrase5, phrase6, phrase7, phrase8]; //extend line22 until all aggressions are complete
 
         var nice = "I like your outfit.";
         var nice2 = "Can you help me with this? I can't figure it out.";
@@ -52,22 +56,57 @@ class choices extends Phaser.Scene {
 
 
         //continue for all friendly phrases
-        var friendly = [nice, nice2, nice3, nice4, nice5, nice6, nice7, nice8]; //extend for all aggressions
+        friendly = [nice, nice2, nice3, nice4, nice5, nice6, nice7, nice8]; //extend for all aggressions
 
         /*********************************************************************************************************************** */
         /*********************************************************************************************************************** */
+        var i = 0;
+        
+        arg = this.add.text(width/2 * 0.2, 250, " ", {font:'bold 20px Arial', color:"#465354"} );
+        yay = this.add.text(width/2 * 0.2, 350, " ", {font:'bold 20px Arial', color:"#465354"});
+        correct = this.add.text(width/2 * 0.2, 420, " ", {font: 'bold 20px Arial', color: "#465354"});
 
-        var rand1 = Math.floor(Math.random() * aggressions.length);
-        var rand2 = Math.floor(Math.random() * friendly.length);
+        var argIsPressed = false;
+        var yayIsPressed = false;
+        scoreText = this.add.text(20,20, 'score: 0',   {font:'15px ', color: "#465354"});
+            reset();
 
-        var obj = aggressions[rand1];
-        var arg = this.add.text(width/2 * 0.2, 200, obj.message, {font:"20px", color:"#465354"} );
-        var yay = this.add.text(width/2 * 0.2, 300, friendly[rand2], {font:"20px", color:"#465354"});
+            arg.setInteractive().on('pointerover', () => arg.setStyle({color: "#f1ab86"})
+                .on('pointerdown', () => right()))
+                .on('pointerout', () => arg.setStyle({color : "#465354"}));
+            yay.setInteractive().on('pointerover', () => yay.setStyle({color: "#f1ab86"})
+                .on('pointerdown', () => wrong()))
+                .on('pointerout', () => yay.setStyle({color : "#465354"}));
 
-        // if(arg.input)
     }
+    
+    
 }
 
-function selectPhrase(clickedMessage) {
+function reset() {
+    rand1 = Math.floor(Math.random() * aggressions.length);
+    var rand2 = Math.floor(Math.random() * friendly.length);
+
+    arg.setText(aggressions[rand1].message);
+    yay.setText(friendly[rand2]);
+}
+
+function wrong(){
+    arg.setStyle({color: "5dc4a8"});
+    yay.setStyle({color: "db4C40"});
+    score = score -60;
+    scoreText.setText('score: ' + score);
+    
+    correct.setText("Hidden meaning: " + aggressions[rand1].meaning);
+    //this.add.text(width/2 * 0.2, 420, aggressions[rand1].meaning, {font: 'bold 20px Arial', color: "#465354"});
+}
+
+function right(){
+    arg.setStyle({color: "5dc4a8"});
+    yay.setStyle({color: "db4C40"});
+    score = score +100;
+    scoreText.setText('score: ' + score);
+
+    correct.setText("Correct!");
 
 }
